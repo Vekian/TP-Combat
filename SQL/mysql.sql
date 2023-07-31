@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jul 31, 2023 at 07:37 AM
+-- Generation Time: Jul 31, 2023 at 07:53 AM
 -- Server version: 10.6.12-MariaDB-1:10.6.12+maria~ubu2004-log
 -- PHP Version: 8.1.14
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `FinalBattle`
 --
+CREATE DATABASE IF NOT EXISTS `FinalBattle` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `FinalBattle`;
 
 -- --------------------------------------------------------
 
