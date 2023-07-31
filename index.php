@@ -1,3 +1,7 @@
+<?php
+require_once 'config/autoload.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
