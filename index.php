@@ -1,5 +1,5 @@
 <?php
-require_once 'config/autoload.php'
+require_once ('config/autoload.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,5 +15,15 @@ require_once 'config/autoload.php'
         <input type="text" id="name" name="name">
         <input type="submit" value="Envoyer">
     </form>
+
+    <?php
+        $db = new PDO('mysql:host=127.0.0.1;dbname=FinalBattle;charset=utf8', 'root');
+        $heroManager = new HeroesManager($db);
+        if (isset($_POST['name'])){
+            $hero = new Hero($_POST['name']);
+            $heroManager->add($hero);
+        }
+        $heroes = $heroManager->findAllAlive();
+    ?>
 </body>
 </html>
