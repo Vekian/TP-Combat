@@ -3,9 +3,11 @@
         private int $id;
         private $name;
         private int $health_point;
+        private $avatar;
 
-        public function __construct($name = null){
+        public function __construct($name = null, $avatar = null){
                 $this->name = $name;
+                $this->avatar = $avatar;
         }
 
         /**
@@ -56,6 +58,14 @@
                 $this->health_point = $health_point;
 
                 return $this;
+        }
+
+        /**
+         * Get the value of avatar
+         */
+        public function getAvatar()
+        {
+                return $this->avatar;
         }
 
         public function hit(){

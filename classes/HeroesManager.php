@@ -10,8 +10,9 @@
         }
 
         public function add(Hero $hero) {
-            $query = $this->db->prepare('INSERT INTO heroes(name) VALUES (:name)');
+            $query = $this->db->prepare('INSERT INTO heroes(name, avatar) VALUES (:name, :avatar)');
             $query->bindValue(':name', $hero->getName());
+            $query->bindValue(':avatar', $hero->getAvatar());
             $query->execute();
             $id = $this->db->lastInsertId();
             $hero->setId($id);
