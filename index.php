@@ -10,6 +10,10 @@ require_once 'config/autoload.php'
     <title>Document</title>
 </head>
 <body>
-    
+    <form method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <input type="submit" value="Envoyer">
+    </form>
 </body>
 </html>
