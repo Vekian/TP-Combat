@@ -1,13 +1,12 @@
 <?php
     class Hero {
-        private int $id;
-        private $name;
-        private int $health_point;
-        private $avatar;
+        protected int $id;
+        protected $name;
+        protected int $health_point;
+        protected $avatar;
 
-        public function __construct($name = null, $avatar = null){
+        public function __construct($name = null){
                 $this->name = $name;
-                $this->avatar = $avatar;
         }
 
         /**
@@ -67,8 +66,24 @@
         {
                 return $this->avatar;
         }
+        public function setAvatar($avatar): self
+        {
+        $this->avatar = $avatar;
 
-        public function hit(){
-            
+        return $this;
+        }
+
+        public function hit(Monster $monster){
+            $damage = rand(0, 50);
+            $monsterHealthPoint = $monster->getHealthPoint();
+            $monster->setHealthPoint($monsterHealthPoint - $damage);
+            return $damage;
+        }
+
+        public function hydrate ($array){
+                $this->setId($array['id']);
+                $this->setName($array['name']);
+                $this->setHealthPoint($array['health_point']);
+                $this->setAvatar($array['avatar']);
         }
     }

@@ -1,4 +1,5 @@
 <?php
+require_once('config/db.php');
 require_once ('config/autoload.php');
 ?>
 
@@ -8,42 +9,69 @@ require_once ('config/autoload.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body class="d-flex justify-content-center">
+<body class="d-flex flex-column align-items-center">
     <main class="col-8">
         <?php
-            $db = new PDO('mysql:host=127.0.0.1;dbname=FinalBattle;charset=utf8', 'root');
+
             $heroManager = new HeroesManager($db);
             if (isset($_POST['name'])){
-                $hero = new Hero($_POST['name'], $_POST['avatar']);
+                    $hero = new $_POST['className']($_POST['name'], $_POST['idClass']);
+                    print_r($hero);
                 $heroManager->add($hero);
             }
             $heroes = $heroManager->findAllAlive();
+            
         ?>
-        <form method="POST" class="text-center bg-success bg-gradient text-light">
+        <header>
+        <form method="POST" class="text-center m-4">
             <label for="name">Name</label>
             <input type="text" id="name" name="name">
-            <label for="avatar">Changez votre avatar : </label>
-            <select id="avatar" name="avatar">
-                <option value="images/avatar1.png">Warrior</option>
-                <option value="images/avatar2.png">Ranger</option>
-                <option value="images/avatar3.png">Mage</option>
-                <option value="images/avatar4.png">Rogue</option>
+            <label for="avatar">Choisissez votre classe : </label>
+
+            
+            <select name="idClass" id="idClass" >
+            <?php $query = $db->query('SELECT * FROM classes WHERE side = "hero"');
+                $classes = $query->fetchAll(PDO::FETCH_ASSOC);
+                $jsonClasses = json_encode($classes);
+                foreach($classes as $class) {
+                    echo('<option value="'. $class['id'] . '">' . $class['nameClass'] . '</option>');
+                }
+            ?>
             </select>
+            <input type="hidden" id="avatar" name="avatar"  value="">
+            <input type="hidden" id="className" name="className" value="">
             <img src="" width="100px"/> 
             <input type="submit" value="Envoyer">
         </form>
+        </header>
+        
         <script>
             let image = document.querySelector('img');
+            let classes = <?= $jsonClasses ?>;
             document.querySelector("select").addEventListener("change", function (e) {
-                let src = e.target.value;
+                let idClass = e.target.value;
+                let src;
+                let className;
+                for(let i =0; i < classes.length; i++) {
+                    if (idClass == classes[i]['id']){
+                        src = classes[i]['avatar'];
+                        className = classes[i]['nameClass'];
+                    }
+                }
                 image.setAttribute("src", src);
+                document.getElementById('avatar').value = src;
+                document.getElementById('className').value = className;
             });
         </script>
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner bg-success bg-gradient rounded">
+            <div class="carousel-inner rounded">
             <?php $totalHeroes = count($heroes); ?>
                     <?php for ($i = 0; $i < $totalHeroes; $i += 3) : ?>
                         <div class="carousel-item <?php if ($i === 0) echo 'active'; ?>">
@@ -51,14 +79,12 @@ require_once ('config/autoload.php');
                                 <?php for ($j = $i; $j < min($i + 3, $totalHeroes); $j++) : ?>
                                     <?php $hero = $heroes[$j]; ?>
                                         <div class="col-md-4">
-                                        <img src="<?php echo($hero->getAvatar()); ?>" class="card-img-top" height="500px">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title"><?php echo($hero->getName()); ?></h5>
-                                            <p class="card-text"><i class="fa-solid fa-heart" style="color: #e01b24;"></i> <?php echo($hero->getHealthpoint(). " PV"); ?></p>
-                                            <form method="GET" action="fight.php">
-                                                <input type="hidden" name="id" value="<?php echo($hero->getId()); ?>">
-                                                <input type="submit" href="fight.php" class="btn btn-primary" value="Choisir">
-                                            </form>
+                                        <img src="<?php echo($hero->getAvatar()); ?>" class="card-img-top" height="250px">
+                                        <div class="card-body text-light  text-center">
+                                            <h5 class="card-title"><?php echo(ucwords($hero->getName())); ?></h5>
+                                            <p class="card-text">Classe : <?php echo($hero->getClassName()) ?><br /><i class="fa-solid fa-heart" style="color: #e01b24;"></i> <?php echo($hero->getHealthpoint(). " PV"); ?></p>
+                                            <button class="btn btn-primary mb-3 submit" value="<?php echo($hero->getId()); ?>">Ajouter</button>
+                                            <a href="process/deleteHero.php"><i class="fa-solid fa-trash-can fa-xl"></i></a>
                                         </div>
                                     </div>
                                 <?php endfor; ?>
@@ -76,6 +102,70 @@ require_once ('config/autoload.php');
             </button>
         </div>
     </main>
+    <section class="text-center text-light">
+        <p>Votre équipe actuelle : </p>
+        <div id="heroesTeam" class="d-flex align-items-center text-light">
+            
+                <ul>
+                    
+                    
+                </ul>
+        </div>
+        <div class="text-center">
+            <form method="POST" action="fight.php" id="formTeam">
+                
+            </form>
+        </div>
+    </section>
+        <script>
+            let buttonsSubmit = document.getElementsByClassName('submit');
+            function findHero(id){
+                $array = [];
+                fetch('process/getHero.php', {
+                    method: "POST",
+                    body: JSON.stringify(id)
+                    }
+                )
+                .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur lors de la requête AJAX');
+                }
+                })
+                .then(function(data) {
+
+                    document.getElementById('heroesTeam').innerHTML += `<div class="me-5 m-3 p-2 card-body text-center d-flex flex-column">
+                                            <h5 class="card-title">${data.name}</h5>
+                                            <p class="card-text">Classe : ${data.nameClass}<br /><i class="fa-solid fa-heart" style="color: #e01b24;"></i> ${data.health_point} PV</p>
+                                            </div>`;
+                    
+                })
+                .catch(function(error) {
+                console.log(error);
+                });
+            }
+            let numberOfHeroes = 0;
+            let teamOfHeroes = [];
+            for(let button of buttonsSubmit ){
+            button.addEventListener('click', function(e){
+                findHero(e.target.value);
+                document.getElementById('formTeam').innerHTML += `<input type="hidden" name="team[]" value="${e.target.value}">`;
+                numberOfHeroes++;
+                teamOfHeroes.push(e.target.value);
+                button.classList.add('invisible');
+                if (numberOfHeroes === 3) {
+                    for(let input of buttonsSubmit ){
+                    input.classList.add('invisible');
+                    };
+                    document.getElementById('formTeam').innerHTML += `<input type="submit" value="FIGHT" class="btn btn-primary m-5 col-4">`;
+                }            
+            })}
+        </script>
+    <form action="process/heal.php" method="POST">
+        <input type="hidden" name="heal" value="1">
+        <input type="submit" value="Soigner tous les héros">
+    </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

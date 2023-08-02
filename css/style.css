@@ -1,0 +1,107 @@
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0, 0); }
+}
+
+.shake-animation {
+    animation: shake 0.5s ease-in-out;
+}
+
+.progress-bar-hero {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+
+  .progress-bar-monster {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+  
+  .progress-fill-hero {
+    height: 100%;
+    background-color: #af954c !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+
+  .progress-fill-monster {
+    height: 100%;
+    background-color: #af954c !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+
+body{
+    background-image: url(../images/background.gif);
+    background-size: cover;
+    font-family: 'Press Start 2P' !important;
+    font-size : 15px;
+  }
+
+  .fa-trash-can:hover{
+    color: red;
+  }
+  .carousel-control-next,
+  .carousel-control-prev {
+    height: 200px;
+  }
+  .card-body {
+    background: rgb(2,0,36);
+    background: linear-gradient(349deg, rgba(2,0,36,1) 0%, rgba(0,0,106,1) 35%, rgba(0,0,0,1) 100%); 
+      border : 6px solid black;
+      clip-path: polygon(
+        0px calc(100% - 28px),
+        4px calc(100% - 28px),
+        4px calc(100% - 20px),
+        8px calc(100% - 20px),
+        8px calc(100% - 12px),
+        12px calc(100% - 12px),
+        12px calc(100% - 8px),
+        20px calc(100% - 8px),
+        20px calc(100% - 4px),
+        28px calc(100% - 4px),
+        28px 100%,
+        calc(100% - 28px) 100%,
+        calc(100% - 28px) calc(100% - 4px),
+        calc(100% - 20px) calc(100% - 4px),
+        calc(100% - 20px) calc(100% - 8px),
+        calc(100% - 12px) calc(100% - 8px),
+        calc(100% - 12px) calc(100% - 12px),
+        calc(100% - 8px) calc(100% - 12px),
+        calc(100% - 8px) calc(100% - 20px),
+        calc(100% - 4px) calc(100% - 20px),
+        calc(100% - 4px) calc(100% - 28px),
+        100% calc(100% - 28px),
+        100% 28px,
+        calc(100% - 4px) 28px,
+        calc(100% - 4px) 20px,
+        calc(100% - 8px) 20px,
+        calc(100% - 8px) 12px,
+        calc(100% - 12px) 12px,
+        calc(100% - 12px) 8px,
+        calc(100% - 20px) 8px,
+        calc(100% - 20px) 4px,
+        calc(100% - 28px) 4px,
+        calc(100% - 28px) 0px,
+        28px 0px,
+        28px 4px,
+        20px 4px,
+        20px 8px,
+        12px 8px,
+        12px 12px,
+        8px 12px,
+        8px 20px,
+        4px 20px,
+        4px 28px,
+        0px 28px
+      );
+    }

@@ -1,6 +1,7 @@
 <?php
     class HeroesManager {
         private $db;
+        private $team;
 
         public function setDb (PDO $db){
             return $this->db = $db;
@@ -10,19 +11,76 @@
         }
 
         public function add(Hero $hero) {
-            $query = $this->db->prepare('INSERT INTO heroes(name, avatar) VALUES (:name, :avatar)');
+            $query = $this->db->prepare('INSERT INTO heroes(name, class_id) VALUES (:name, :class_id)');
             $query->bindValue(':name', $hero->getName());
-            $query->bindValue(':avatar', $hero->getAvatar());
+            $query->bindValue(':class_id', $hero->getClass());
             $query->execute();
             $id = $this->db->lastInsertId();
             $hero->setId($id);
             $hero->setHealthPoint(100);
         }
 
+        public function find(int $id){
+            $query = $this->db->query('SELECT * FROM classes
+                                        JOIN heroes ON classes.id = heroes.class_id 
+                                        WHERE heroes.id = "' . $id . '"');
+            $heroSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            $heroData = $heroSelected[0];
+            $className = $heroData['nameClass'];
+                $hero = new $className();
+                $hero->hydrate($heroData);
+            return $hero;
+        }
+
         public function findAllAlive() {
-            $query = $this->db->query('SELECT * FROM heroes WHERE health_point > 0');
-            $heroesAlive = $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Hero");
+            $query = $this->db->query('SELECT * FROM classes
+                                    JOIN heroes ON classes.id = heroes.class_id
+                                     WHERE health_point > 0');
+            $heroesAliveData = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $heroesAlive = [];
+            foreach ($heroesAliveData as $heroData) {
+                $className = $heroData['nameClass'];
+                $hero = new $className();
+                $hero->hydrate($heroData);
+                array_push($heroesAlive, $hero);
+            }
             return $heroesAlive;
+        }
+        public function update($team){
+            foreach($team as $hero){
+                $query = $this->db->prepare('UPDATE heroes SET health_point = :health_point WHERE id = :id');
+            $query->bindValue(':health_point', $hero->getHealthPoint());
+            $query->bindValue(':id', $hero->getId());
+            $query->execute();
+            }
+            
+        }
+        public function teamMaker($array) {
+            $team = [];
+            foreach($array as $key => $value){
+                $hero = $this->find($value);
+                array_push($team, $hero);
+            }
+            $this->setTeam($team);
+        }
+
+        /**
+         * Get the value of team
+         */
+        public function getTeam()
+        {
+                return $this->team;
+        }
+
+        /**
+         * Set the value of team
+         */
+        public function setTeam($team): self
+        {
+                $this->team = $team;
+
+                return $this;
         }
     }
 ?>
