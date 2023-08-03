@@ -7,8 +7,9 @@ function addShakeEffect(cardContainer) {
     }
 function hpBar(characterHP, characterHPLeft, side, heroNumber){
     if (side == "hero"){
-    let percentage = (100 * characterHPLeft)/characterHP; 
-    console.log(percentage);// Remplacez cette valeur par le pourcentage réel que vous voulez afficher
+        console.log(characterHP);
+        console.log(characterHPLeft);
+    let percentage = (100 * characterHPLeft)/characterHP; // Remplacez cette valeur par le pourcentage réel que vous voulez afficher
     let progressBar = document.getElementsByClassName('progress-fill-hero');
         if (characterHPLeft <= 0){
             progressBar[heroNumber].style.width = 0 + '%';
@@ -27,21 +28,42 @@ function hpBar(characterHP, characterHPLeft, side, heroNumber){
 }
 
 function battleStart(results) {
+    let arraySpecial = {
+        'Mage' : 'Le héros lance une boule de feu !',
+        'Warrior' : "Le héros lance un puissant coup !",
+        'Ranger' : "Le héros décoche plusieurs flèches !",
+        'Rogue' : "Le héros effectue une attaque sournoise !"
+    };
     let i = 0;
     let heroNumber = 0;
-    let heroHP = heroHPLeft[heroNumber];
     let monsterHP = document.getElementById('monsterHP').innerHTML;
     const battle = setInterval(() => {
+        document.querySelector('.monster-container').classList.remove('flash');
         let result = results[i].split("/");
-        if (result[2] === "hit") {
-        if( (i === 0) || (i % 2 === 0) ){
-        document.getElementById('results').innerHTML = result[0] + " a subit " + result[1] + ' dommages<br />';
-        heroHPLeft[heroNumber] -= result[1];
-        hpBar(heroHP, heroHPLeft[heroNumber], "hero", heroNumber);
-        document.getElementById('heroHP' + heroNumber).innerHTML = heroHPLeft[heroNumber];
-        let heroContainer = document.querySelector('#hero-container' + heroNumber);
-        addShakeEffect(heroContainer);
+        if (result[2] === "dodge") {
+            document.getElementById('results').innerHTML = result[0] + " a esquivé l'attaque.<br />";
+            
         }
+        else if (result[2] === "special"){
+            if ((i % 2 != 0)) {
+            document.getElementById('results').innerHTML = arraySpecial[result[3]] + result[0] + " a subit " + result[1] + ' dommages<br />';
+            monsterHPLeft -= result[1];
+            hpBar(monsterHP, monsterHPLeft), "monster";
+            document.getElementById('monsterHP').innerHTML = monsterHPLeft;
+            let monsterContainer = document.querySelector('.monster-container');
+            addShakeEffect(monsterContainer);
+            monsterContainer.classList.add('flash');
+            }
+        }
+        else if (result[2] === "hit") {
+            if ((i === 0) || (i % 2 === 0)) {
+                    document.getElementById('results').innerHTML = result[0] + " a subit " + result[1] + ' dommages<br />';
+                    heroHPLeft[heroNumber] -= result[1];
+                    hpBar(heroHP[heroNumber], heroHPLeft[heroNumber], "hero", heroNumber);
+                    document.getElementById('heroHP' + heroNumber).innerHTML = heroHPLeft[heroNumber];
+                    let heroContainer = document.querySelector('#hero-container' + heroNumber);
+                    addShakeEffect(heroContainer);
+            }
         else {
             document.getElementById('results').innerHTML = result[0] + " a subit " + result[1] + ' dommages<br />';
             monsterHPLeft -= result[1];
@@ -50,18 +72,27 @@ function battleStart(results) {
             let monsterContainer = document.querySelector('.monster-container');
             addShakeEffect(monsterContainer);
         }
-        i++;}
+        }
         else if (result[2] === "death"){
             if (result[3] === "hero") {
+                if(heroNumber === 2){
+                    document.getElementById('hero-container' + heroNumber).classList.add('d-none');
+                    document.getElementById('hero-container' + heroNumber).classList.remove('d-none');
+                    heroNumber++;
+                    document.getElementById('results').innerHTML = "Vous avez perdu !<br /> " + result[0] + " est mort, il reste " + result[1] + "PV au monstre.";
+                }
+                else {
             document.getElementById('hero-container' + heroNumber).classList.add('d-none');
             heroNumber++;
             document.getElementById('hero-container' + heroNumber).classList.remove('d-none');
             document.getElementById('results').innerHTML = result[0] + " est mort, il reste " + result[1] + "PV au monstre.";
-            i++;}
+            }}
             else if (result[3] === "monster") {
-                document.getElementById('results').innerHTML = result[0] + " est mort, il reste " + result[1] + "PV au héros.";
+                document.getElementById('results').innerHTML = "Bravo !<br /> " + result[0] + " est mort, il reste " + result[1] + "PV au héros.";
+                clearInterval(battle);
             }
         }
+        i++;
         if (i >= results.length) {
             clearInterval(battle);
         }

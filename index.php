@@ -23,15 +23,14 @@ require_once ('config/autoload.php');
             $heroManager = new HeroesManager($db);
             if (isset($_POST['name'])){
                     $hero = new $_POST['className']($_POST['name'], $_POST['idClass']);
-                    print_r($hero);
                 $heroManager->add($hero);
             }
             $heroes = $heroManager->findAllAlive();
             
         ?>
-        <header>
+        <header class="text-light">
         <form method="POST" class="text-center m-4">
-            <label for="name">Name</label>
+            <label for="name">Nom</label>
             <input type="text" id="name" name="name">
             <label for="avatar">Choisissez votre classe : </label>
 
@@ -40,15 +39,16 @@ require_once ('config/autoload.php');
             <?php $query = $db->query('SELECT * FROM classes WHERE side = "hero"');
                 $classes = $query->fetchAll(PDO::FETCH_ASSOC);
                 $jsonClasses = json_encode($classes);
+                echo('<option value="" selected disabled hidden>Choisir</option>');
                 foreach($classes as $class) {
                     echo('<option value="'. $class['id'] . '">' . $class['nameClass'] . '</option>');
                 }
             ?>
-            </select>
+            </select class="btn btn-primary">
             <input type="hidden" id="avatar" name="avatar"  value="">
             <input type="hidden" id="className" name="className" value="">
             <img src="" width="100px"/> 
-            <input type="submit" value="Envoyer">
+            <input type="submit" value="Envoyer" class="btn btn-primary">
         </form>
         </header>
         
@@ -79,12 +79,12 @@ require_once ('config/autoload.php');
                                 <?php for ($j = $i; $j < min($i + 3, $totalHeroes); $j++) : ?>
                                     <?php $hero = $heroes[$j]; ?>
                                         <div class="col-md-4">
-                                        <img src="<?php echo($hero->getAvatar()); ?>" class="card-img-top" height="250px">
+                                        <img src="<?php echo($hero->getAvatar()); ?>" class="card-img-top">
                                         <div class="card-body text-light  text-center">
                                             <h5 class="card-title"><?php echo(ucwords($hero->getName())); ?></h5>
-                                            <p class="card-text">Classe : <?php echo($hero->getClassName()) ?><br /><i class="fa-solid fa-heart" style="color: #e01b24;"></i> <?php echo($hero->getHealthpoint(). " PV"); ?></p>
+                                            <p class="card-text">Classe : <?php echo($hero->getClassName()) ?><br /><?php echo("<span class='me-2'>" . $hero->getHealthpoint() . "</span>"); ?><i class="fa-solid fa-heart me-3 " style="color: #e01b24;"> </i><?php echo("<span class='me-2'>" . $hero->getAttack() . "</span>"); ?><img id="attack" src="images/attack.png" height="24px"></p>
                                             <button class="btn btn-primary mb-3 submit" value="<?php echo($hero->getId()); ?>">Ajouter</button>
-                                            <a href="process/deleteHero.php"><i class="fa-solid fa-trash-can fa-xl"></i></a>
+                                            <a href="process/deleteHero.php?id=<?php echo($hero->getId()); ?>"><i class="fa-solid fa-trash-can fa-xl"></i></a>
                                         </div>
                                     </div>
                                 <?php endfor; ?>
@@ -103,6 +103,11 @@ require_once ('config/autoload.php');
         </div>
     </main>
     <section class="text-center text-light">
+        <div class="text-center">
+            <form method="POST" action="fight.php" id="formTeam">
+                
+            </form>
+        </div>
         <p>Votre équipe actuelle : </p>
         <div id="heroesTeam" class="d-flex align-items-center text-light">
             
@@ -110,11 +115,6 @@ require_once ('config/autoload.php');
                     
                     
                 </ul>
-        </div>
-        <div class="text-center">
-            <form method="POST" action="fight.php" id="formTeam">
-                
-            </form>
         </div>
     </section>
         <script>
@@ -158,13 +158,13 @@ require_once ('config/autoload.php');
                     for(let input of buttonsSubmit ){
                     input.classList.add('invisible');
                     };
-                    document.getElementById('formTeam').innerHTML += `<input type="submit" value="FIGHT" class="btn btn-primary m-5 col-4">`;
+                    document.getElementById('formTeam').innerHTML += `<input type="submit" value="FIGHT" class="btn btn-primary pt-3 pb-3 m-2 col-4">`;
                 }            
             })}
         </script>
     <form action="process/heal.php" method="POST">
         <input type="hidden" name="heal" value="1">
-        <input type="submit" value="Soigner tous les héros">
+        <input type="submit" value="Soigner tous les héros" class="btn btn-primary">
     </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

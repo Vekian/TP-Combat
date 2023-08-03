@@ -11,9 +11,11 @@
         }
 
         public function add(Hero $hero) {
-            $query = $this->db->prepare('INSERT INTO heroes(name, class_id) VALUES (:name, :class_id)');
+            $query = $this->db->prepare('INSERT INTO heroes(name, health_point, attack, class_id) VALUES (:name, :health_point, :attack, :class_id)');
             $query->bindValue(':name', $hero->getName());
             $query->bindValue(':class_id', $hero->getClass());
+            $query->bindValue(':attack', $hero->getAttack());
+            $query->bindValue(':health_point', $hero->getHealthPoint());
             $query->execute();
             $id = $this->db->lastInsertId();
             $hero->setId($id);
@@ -35,7 +37,8 @@
         public function findAllAlive() {
             $query = $this->db->query('SELECT * FROM classes
                                     JOIN heroes ON classes.id = heroes.class_id
-                                     WHERE health_point > 0');
+                                     WHERE health_point > 0
+                                     ORDER BY heroes.id ASC');
             $heroesAliveData = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $heroesAlive = [];
