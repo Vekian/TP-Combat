@@ -5,6 +5,7 @@
         private $healthPoint;
         private $avatar;
         private $class_id;
+        private $poison = false;
 
 
 

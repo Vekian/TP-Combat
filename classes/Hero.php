@@ -3,10 +3,13 @@
         protected int $id;
         protected $name;
         protected int $health_point;
+        protected $attack;
         protected $avatar;
 
-        public function __construct($name = null){
+        public function __construct($name, $health_point, $attack){
                 $this->name = $name;
+                $this->health_point = $health_point;
+                $this->attack = $attack;
         }
 
         /**
@@ -73,8 +76,8 @@
         return $this;
         }
 
-        public function hit(Monster $monster){
-            $damage = rand(0, 50);
+        public function hit(Monster $monster, $specialDmg){
+            $damage = (rand(0, $this->getAttack())) + $specialDmg;
             $monsterHealthPoint = $monster->getHealthPoint();
             $monster->setHealthPoint($monsterHealthPoint - $damage);
             return $damage;
@@ -85,5 +88,25 @@
                 $this->setName($array['name']);
                 $this->setHealthPoint($array['health_point']);
                 $this->setAvatar($array['avatar']);
+                $this->setAttack($array['attack']);
+        }
+
+
+        /**
+         * Get the value of attack
+         */
+        public function getAttack()
+        {
+                return $this->attack;
+        }
+
+        /**
+         * Set the value of attack
+         */
+        public function setAttack($attack): self
+        {
+                $this->attack = $attack;
+
+                return $this;
         }
     }

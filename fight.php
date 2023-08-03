@@ -15,7 +15,6 @@ $monster = $monsters[0];
 $monsterHP = $monster->getHealthPoint();
 $fightResults = $fightManager->fight($team, $monster);
 $results = json_encode($fightResults);
-
 $heroManager->update($team);
 ?>
 <!DOCTYPE html>
@@ -24,6 +23,9 @@ $heroManager->update($team);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -32,8 +34,8 @@ $heroManager->update($team);
     <main class="col-12 d-flex flex-column align-items-center">
         <div class="col-12 d-flex justify-content-center">
             <div class="col-md-3 rounded me-5 hero-container" id="hero-container0">
-                <img src="<?php echo($team[0]->getAvatar()); ?>" class="card-img-top" height="430px">
-                <div class="card-body text-center">
+                <img src="<?php echo($team[0]->getAvatar()); ?>" class="card-img-top" >
+                <div class="card-body text-light text-center p-3 ">
                     <h5 class="card-title"><?php echo(ucwords($team[0]->getName())); ?></h5>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
@@ -43,8 +45,8 @@ $heroManager->update($team);
                 </div>
             </div>
             <div class="col-md-3 rounded me-5 hero-container d-none" id="hero-container1">
-                <img src="<?php echo($team[1]->getAvatar()); ?>" class="card-img-top" height="430px">
-                <div class="card-body text-center">
+                <img src="<?php echo($team[1]->getAvatar()); ?>" class="card-img-top" >
+                <div class="card-body text-light text-center p-3">
                     <h5 class="card-title"><?php echo(ucwords($team[1]->getName())); ?></h5>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
@@ -54,8 +56,8 @@ $heroManager->update($team);
                 </div>
             </div>
             <div class="col-md-3 rounded me-5 hero-container d-none" id="hero-container2">
-                <img src="<?php echo($team[2]->getAvatar()); ?>" class="card-img-top" height="430px">
-                <div class="card-body text-center">
+                <img src="<?php echo($team[2]->getAvatar()); ?>" class="card-img-top" >
+                <div class="card-body text-light text-center p-3">
                     <h5 class="card-title"><?php echo(ucwords($team[2]->getName())); ?></h5>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
@@ -66,8 +68,8 @@ $heroManager->update($team);
             </div>
             
             <div class="col-md-3 rounded ms-5 monster-container">
-                <img src="<?echo ($monster->getAvatar()); ?>" class="card-img-top" height="430px">
-                <div class="card-body text-center">
+                <img src="<?echo ($monster->getAvatar()); ?>" class="card-img-top" >
+                <div class="card-body text-light text-center p-3">
                     <h5 class="card-title"><?php echo(ucwords($monster->getName())); ?></h5>
                     <div class="progress-bar-monster">
                         <div class="progress-fill-monster">
@@ -77,7 +79,7 @@ $heroManager->update($team);
                 </div>
             </div>
         </div>
-        <div id="results">
+        <div id="results" class="text-light card-body p-4 mt-4">
         </div>
         <div class="col-4 mt-5">
             <a href="index.php" class="btn btn-primary col-12" id="fight" > Choisir un nouvel héros </a href="index.php">
@@ -86,6 +88,7 @@ $heroManager->update($team);
 
 <script>
     let dataFight = <?= $results ?>;
+    let heroHP = <?php echo(json_encode($heroHPTeam)); ?>;
     let heroHPLeft = <?php echo(json_encode($heroHPTeam)); ?>;
     let monsterHPLeft = <?php echo($monsterHP); ?>;
     let heroNumber = 0;
