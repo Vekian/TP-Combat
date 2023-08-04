@@ -7,8 +7,6 @@ function addShakeEffect(cardContainer) {
     }
 function hpBar(characterHP, characterHPLeft, side, heroNumber){
     if (side == "hero"){
-        console.log(characterHP);
-        console.log(characterHPLeft);
     let percentage = (100 * characterHPLeft)/characterHP; // Remplacez cette valeur par le pourcentage réel que vous voulez afficher
     let progressBar = document.getElementsByClassName('progress-fill-hero');
         if (characterHPLeft <= 0){
@@ -27,6 +25,28 @@ function hpBar(characterHP, characterHPLeft, side, heroNumber){
     }
 }
 
+function manaBar(characterMana, characterManaLeft, side, heroNumber){
+    if (side == "hero"){
+        console.log(characterMana);
+        console.log(characterManaLeft);
+    let percentage = (100 * characterManaLeft)/characterMana; // Remplacez cette valeur par le pourcentage réel que vous voulez afficher
+    let progressBar = document.getElementsByClassName('mana-fill-hero');
+        if (characterManaLeft <= 0){
+            progressBar[heroNumber].style.width = 0 + '%';
+            percentage = 0;
+        } 
+        progressBar[heroNumber].style.width = percentage + '%';
+    }
+    else {
+        let percentage = 100 * (characterHPLeft/characterHP); // Remplacez cette valeur par le pourcentage réel que vous voulez afficher
+        let progressBar = document.querySelector('.mana-fill-monster');
+        if (characterHPLeft <= 0){
+            progressBar.style.width = 0 + '%';
+        } 
+        progressBar.style.width = percentage + '%';
+    }
+}
+
 function battleStart(results) {
     let arraySpecial = {
         'Mage' : 'Le héros lance une boule de feu !',
@@ -37,6 +57,7 @@ function battleStart(results) {
     let i = 0;
     let heroNumber = 0;
     let monsterHP = document.getElementById('monsterHP').innerHTML;
+    manaBar(heroMana[heroNumber], heroManaLeft[heroNumber], "hero", heroNumber);
     const battle = setInterval(() => {
         document.querySelector('.monster-container').classList.remove('flash');
         let result = results[i].split("/");
@@ -48,8 +69,11 @@ function battleStart(results) {
             if ((i % 2 != 0)) {
             document.getElementById('results').innerHTML = arraySpecial[result[3]] + result[0] + " a subit " + result[1] + ' dommages<br />';
             monsterHPLeft -= result[1];
+            heroManaLeft[heroNumber] -= 20;
             hpBar(monsterHP, monsterHPLeft), "monster";
+            manaBar(heroMana[heroNumber], heroManaLeft[heroNumber], "hero", heroNumber);
             document.getElementById('monsterHP').innerHTML = monsterHPLeft;
+            document.getElementById('heroMana' + heroNumber).innerHTML = heroManaLeft[heroNumber];
             let monsterContainer = document.querySelector('.monster-container');
             addShakeEffect(monsterContainer);
             monsterContainer.classList.add('flash');
@@ -92,6 +116,11 @@ function battleStart(results) {
                 clearInterval(battle);
             }
         }
+        if ((i % 2 != 0)) {
+            heroManaLeft[heroNumber] += 10;
+            manaBar(heroMana[heroNumber], heroManaLeft[heroNumber], "hero", heroNumber);
+            document.getElementById('heroMana' + heroNumber).innerHTML = heroManaLeft[heroNumber];
+        };
         i++;
         if (i >= results.length) {
             clearInterval(battle);

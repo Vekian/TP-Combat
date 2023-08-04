@@ -5,11 +5,13 @@
         protected int $health_point;
         protected $attack;
         protected $avatar;
+        protected $mana;
 
-        public function __construct($name, $health_point, $attack){
+        public function __construct($name, $health_point, $attack, $mana){
                 $this->name = $name;
                 $this->health_point = $health_point;
                 $this->attack = $attack;
+                $this->mana = $mana;
         }
 
         /**
@@ -89,6 +91,7 @@
                 $this->setHealthPoint($array['health_point']);
                 $this->setAvatar($array['avatar']);
                 $this->setAttack($array['attack']);
+                $this->setMana($array['mana']);
         }
 
 
@@ -106,6 +109,24 @@
         public function setAttack($attack): self
         {
                 $this->attack = $attack;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of mana
+         */
+        public function getMana()
+        {
+                return $this->mana;
+        }
+
+        /**
+         * Set the value of mana
+         */
+        public function setMana($mana): self
+        {
+                $this->mana = $mana;
 
                 return $this;
         }

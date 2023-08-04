@@ -11,11 +11,12 @@
         }
 
         public function add(Hero $hero) {
-            $query = $this->db->prepare('INSERT INTO heroes(name, health_point, attack, class_id) VALUES (:name, :health_point, :attack, :class_id)');
+            $query = $this->db->prepare('INSERT INTO heroes(name, health_point, mana, attack, class_id) VALUES (:name, :health_point, :mana, :attack, :class_id)');
             $query->bindValue(':name', $hero->getName());
             $query->bindValue(':class_id', $hero->getClass());
             $query->bindValue(':attack', $hero->getAttack());
             $query->bindValue(':health_point', $hero->getHealthPoint());
+            $query->bindValue(':mana', $hero->getMana());
             $query->execute();
             $id = $this->db->lastInsertId();
             $hero->setId($id);
@@ -52,8 +53,9 @@
         }
         public function update($team){
             foreach($team as $hero){
-                $query = $this->db->prepare('UPDATE heroes SET health_point = :health_point WHERE id = :id');
+                $query = $this->db->prepare('UPDATE heroes SET health_point = :health_point, mana = :mana WHERE id = :id');
             $query->bindValue(':health_point', $hero->getHealthPoint());
+            $query->bindValue(':mana', $hero->getMana());
             $query->bindValue(':id', $hero->getId());
             $query->execute();
             }

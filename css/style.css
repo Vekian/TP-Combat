@@ -51,13 +51,42 @@
   
   .progress-fill-hero {
     height: 100%;
-    background-color: #af954c !important;
+    background-color: #62ca0d !important;
     transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
   }
 
   .progress-fill-monster {
     height: 100%;
-    background-color: #af954c !important;
+    background-color: #62ca0d !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+  .mana-bar-hero {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+.mana-fill-hero {
+    height: 100%;
+    background-color: #0d9eca !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  
+  }
+
+  .mana-bar-monster {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+  
+  .mana-fill-monster {
+    height: 100%;
+    background-color: #0dca91 !important;
     transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
   }
 
@@ -133,7 +162,7 @@ body{
       height : 400px;
     }
     :root {
-      --pixel-bg: lightblue;
+      --pixel-bg: rgba(0,0,106,1);
       /* ↑ Inner background color */
       
       --pixel-border: black;
@@ -224,6 +253,9 @@ body{
       #attack {
         filter: invert(60%);
       }
+      #mana {
+        filter: brightness(1.75);
+      }
       @keyframes flashAnimation {
         0% {
           filter : invert(100%); /* Opacité normale */
@@ -261,7 +293,13 @@ body{
         background-color: #f1f1f1 !important;
         overflow: hidden;
       }
-    
+    .progress-fill-hero {
+        height: 100%;
+        background-color: #62ca0d !important;
+        transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+      
+      }
+
       .progress-bar-monster {
         z-index: 1;
         width: 100%;
@@ -271,15 +309,39 @@ body{
         overflow: hidden;
       }
       
-      .progress-fill-hero {
-        height: 100%;
-        background-color: #af954c !important;
-        transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
-      }
-    
       .progress-fill-monster {
         height: 100%;
-        background-color: #af954c !important;
+        background-color: #62ca0d !important;
+        transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+      }
+
+      .mana-bar-hero {
+        z-index: 1;
+        width: 100%;
+        height: 20px;
+        border: 1px solid #ccc !important;
+        background-color: #f1f1f1 !important;
+        overflow: hidden;
+      }
+    .mana-fill-hero {
+        height: 100%;
+        background-color: #0d9eca !important;
+        transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+      
+      }
+
+      .mana-bar-monster {
+        z-index: 1;
+        width: 100%;
+        height: 20px;
+        border: 1px solid #ccc !important;
+        background-color: #f1f1f1 !important;
+        overflow: hidden;
+      }
+      
+      .mana-fill-monster {
+        height: 100%;
+        background-color: #0dca91 !important;
         transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
       }
     
@@ -442,4 +504,5 @@ input[type="text"] {
   background-color: rgb(28, 79, 245);
   color: white;
 }
+
     }

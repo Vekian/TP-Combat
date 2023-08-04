@@ -1,8 +1,8 @@
 <?php
 class Mage extends Hero {
     private $class_id;
-    private $dodge = 15;
-    private $special = 75;
+    private $dodge = 10;
+    private $special = 85;
 
     /**
      * Get the value of class_id
@@ -25,8 +25,8 @@ class Mage extends Hero {
         return get_class($this);
     }
 
-    function __construct(string $name = null, $class_id = null, $health_point = 80, $attack = 30) {
-        parent::__construct($name, $health_point, $attack);
+    function __construct(string $name = null, $class_id = null, $health_point = 80, $mana = 30, $attack = 30) {
+        parent::__construct($name, $health_point, $mana, $attack);
         $this->class_id = $class_id;
     }
     public function hydrate ($array){
@@ -35,8 +35,9 @@ class Mage extends Hero {
 }
     public function specialHit(Monster $monster) {
         $damage = 0;
-        if ($this->getSpecial() >= rand(0, 100)) {
-            $damage = 30;
+        if (($this->getSpecial() >= rand(0, 100)) && ($this->getMana() >= 20)) {
+            $damage = 45;
+            $this->setMana($this->getMana() - 20);
             return $damage;
         }
         else return $damage;
