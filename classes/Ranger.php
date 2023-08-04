@@ -2,7 +2,7 @@
 class Ranger extends Hero {
     private $class_id;
     private $dodge = 15;
-    private $special = 60;
+    private $special = 70;
 
     /**
      * Get the value of class_id

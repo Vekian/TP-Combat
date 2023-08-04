@@ -28,22 +28,30 @@
             foreach($team as $hero){
             while ($monster->getHealthPoint() > 0){
                 $specialDmg = $hero->specialHit($monster);
+                $specialDmgMonster = $monster->specialHit($hero);
                 $iHero = $hero;
-                if ($this->dodge($hero)){
-                    $result = $hero->getName() . "/". 0 . "/dodge";
-                    array_push($results, $result);
-                }
-                else {
-                $result = $hero->getName() . "/" . $monster->hit($hero) . "/hit";
-                array_push($results, $result);
-                }
+                    if ($specialDmgMonster > 0) {
+                        $result = $monster->getName() . "/" . $monster->hit($hero, $specialDmgMonster) . "/special";
+                        array_push($results, $result);
+                    }
+                    else {
+                        if ($this->dodge($hero)){
+                            $result = $hero->getName() . "/". 0 . "/dodge";
+                            array_push($results, $result);
+                        } else {
+                        $result = $hero->getName() . "/" . $monster->hit($hero, $specialDmgMonster) . "/hit";
+                        array_push($results, $result);
+                        }
+                    }
                 if ($hero->getHealthPoint() > 0) {
                     if($specialDmg > 0) {
                         $result = $monster->getName() . "/" . $hero->hit($monster, $specialDmg) . "/special" . "/" . $hero->getClassName();
+                        $monster->setMana($monster->getMana() + 10);
                         array_push($results, $result);
                     }
                     else {
                         $result = $monster->getName() . "/" . $hero->hit($monster, $specialDmg) . "/hit";
+                        $monster->setMana($monster->getMana() + 5);
                         array_push($results, $result);
                     }
                 }

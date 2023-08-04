@@ -1,4 +1,14 @@
-@media screen and (max-width: 1301px) {
+@media screen and (max-width: 700px) {
+  #heroesTeam{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header form {
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+  }
   #attack {
     filter: invert(60%);
   }
@@ -86,7 +96,262 @@
   
   .mana-fill-monster {
     height: 100%;
-    background-color: #0dca91 !important;
+    background-color: #ca0000 !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+
+body{
+    background-image: url(../images/background.gif);
+    background-size: cover;
+    font-family: 'Press Start 2P' !important;
+    font-size : 15px;
+  }
+
+  .fa-trash-can:hover{
+    color: red;
+  }
+  .carousel-control-next,
+  .carousel-control-prev {
+    height: 200px;
+  }
+  .card-body {
+    background: rgb(2,0,36);
+    background: linear-gradient(349deg, rgba(2,0,36,1) 0%, rgba(0,0,106,1) 35%, rgba(0,0,0,1) 100%); 
+      border : 6px solid black;
+      clip-path: polygon(
+        0px calc(100% - 28px),
+        4px calc(100% - 28px),
+        4px calc(100% - 20px),
+        8px calc(100% - 20px),
+        8px calc(100% - 12px),
+        12px calc(100% - 12px),
+        12px calc(100% - 8px),
+        20px calc(100% - 8px),
+        20px calc(100% - 4px),
+        28px calc(100% - 4px),
+        28px 100%,
+        calc(100% - 28px) 100%,
+        calc(100% - 28px) calc(100% - 4px),
+        calc(100% - 20px) calc(100% - 4px),
+        calc(100% - 20px) calc(100% - 8px),
+        calc(100% - 12px) calc(100% - 8px),
+        calc(100% - 12px) calc(100% - 12px),
+        calc(100% - 8px) calc(100% - 12px),
+        calc(100% - 8px) calc(100% - 20px),
+        calc(100% - 4px) calc(100% - 20px),
+        calc(100% - 4px) calc(100% - 28px),
+        100% calc(100% - 28px),
+        100% 28px,
+        calc(100% - 4px) 28px,
+        calc(100% - 4px) 20px,
+        calc(100% - 8px) 20px,
+        calc(100% - 8px) 12px,
+        calc(100% - 12px) 12px,
+        calc(100% - 12px) 8px,
+        calc(100% - 20px) 8px,
+        calc(100% - 20px) 4px,
+        calc(100% - 28px) 4px,
+        calc(100% - 28px) 0px,
+        28px 0px,
+        28px 4px,
+        20px 4px,
+        20px 8px,
+        12px 8px,
+        12px 12px,
+        8px 12px,
+        8px 20px,
+        4px 20px,
+        4px 28px,
+        0px 28px
+      );
+    }
+    .card-img-top {
+      height : 250px; 
+    }
+    .hero-container .card-img-top, .monster-container .card-img-top{
+      height : 250px;
+    }
+    .hero-container, .monster-container {
+      font-size: small;
+    }
+    :root {
+      --pixel-bg: rgba(0,0,106,1);
+      /* ↑ Inner background color */
+      
+      --pixel-border: black;
+      /* ↑ Inner border color */
+      
+      --pixel-border-2: white;
+      /* ↑ Middle border color */
+      
+      --pixel-border-3: var(--pixel-border);
+      /* ↑ Outer border color */
+      
+      --pixel: .125rem;
+      /* ↑ Pixel size */
+    }
+    
+    header {
+      background: var(--pixel-bg);
+      box-shadow:
+        
+      /* Inner Background Color */
+        0 calc(var(--pixel) * -3) 0 calc(var(--pixel) * -1) var(--pixel-bg),
+        0 calc(var(--pixel) * 3) 0 calc(var(--pixel) * -1) var(--pixel-bg),
+        0 calc(var(--pixel) * -6) 0 calc(var(--pixel) * -2) var(--pixel-bg),
+        0 calc(var(--pixel) * 6) 0 calc(var(--pixel) * -2) var(--pixel-bg),
+        0 calc(var(--pixel) * -9) 0 calc(var(--pixel) * -4) var(--pixel-bg),
+        0 calc(var(--pixel) * 9) 0 calc(var(--pixel) * -4) var(--pixel-bg),
+        0 calc(var(--pixel) * -12) 0 calc(var(--pixel) * -6) var(--pixel-bg),
+        0 calc(var(--pixel) * 12) 0 calc(var(--pixel) * -6) var(--pixel-bg),
+        
+      /* Pixel Border Layer 1 */
+        calc(var(--pixel) * -1) 0 0 0 var(--pixel-border),
+        var(--pixel) 0 0 0 var(--pixel-border),
+        0 calc(var(--pixel) * -2) 0 0 var(--pixel-border),
+        0 calc(var(--pixel) * 2) 0 0 var(--pixel-border),
+        0 calc(var(--pixel) * -5) 0 calc(var(--pixel) * -1) var(--pixel-border),
+        0 calc(var(--pixel) * 5) 0 calc(var(--pixel) * -1) var(--pixel-border),
+        0 calc(var(--pixel) * -7) 0 calc(var(--pixel) * -2) var(--pixel-border),
+        0 calc(var(--pixel) * 7) 0 calc(var(--pixel) * -2) var(--pixel-border),
+        0 calc(var(--pixel) * -10) 0 calc(var(--pixel) * -4) var(--pixel-border),
+        0 calc(var(--pixel) * 10) 0 calc(var(--pixel) * -4) var(--pixel-border),
+        0 calc(var(--pixel) * -13) 0 calc(var(--pixel) * -6) var(--pixel-border),
+        0 calc(var(--pixel) * 13) 0 calc(var(--pixel) * -6) var(--pixel-border),
+        
+      /* Pixel Border Layer 2 */
+        calc(var(--pixel) * -2) 0 0 0 var(--pixel-border-2),
+        calc(var(--pixel) * 2) 0 0 0 var(--pixel-border-2),
+        0 calc(var(--pixel) * -1) 0 var(--pixel) var(--pixel-border-2), 
+        0 var(--pixel) 0 var(--pixel) var(--pixel-border-2),
+        0 calc(var(--pixel) * -4) 0 0 var(--pixel-border-2),
+        0 calc(var(--pixel) * 4) 0 0 var(--pixel-border-2),
+        0 calc(var(--pixel) * -6) 0 calc(var(--pixel) * -1) var(--pixel-border-2),
+        0 calc(var(--pixel) * 6) 0 calc(var(--pixel) * -1) var(--pixel-border-2),
+        0 calc(var(--pixel) * -8) 0 calc(var(--pixel) * -2) var(--pixel-border-2),
+        0 calc(var(--pixel) * 8) 0 calc(var(--pixel) * -2) var(--pixel-border-2),
+        0 calc(var(--pixel) * -11) 0 calc(var(--pixel) * -4) var(--pixel-border-2),
+        0 calc(var(--pixel) * 11) 0 calc(var(--pixel) * -4) var(--pixel-border-2),
+        0 calc(var(--pixel) * -14) 0 calc(var(--pixel) * -6) var(--pixel-border-2),
+        0 calc(var(--pixel) * 14) 0 calc(var(--pixel) * -6) var(--pixel-border-2),
+        
+      /* Border Layer 3: --pixel-border-3 */
+        calc(var(--pixel) * -3) 0 0 0 var(--pixel-border-3),
+        calc(var(--pixel) * 3) 0 0 0 var(--pixel-border-3),
+        0 0 0 calc(var(--pixel) * 2) var(--pixel-border-3),
+        0 calc(var(--pixel) * -3) 0 var(--pixel) var(--pixel-border-3),
+        0 calc(var(--pixel) * 3) 0 var(--pixel) var(--pixel-border-3),
+        0 calc(var(--pixel) * -5) 0 0 var(--pixel-border-3),
+        0 calc(var(--pixel) * 5) 0 0 var(--pixel-border-3),
+        0 calc(var(--pixel) * -7) 0 calc(var(--pixel) * -1) var(--pixel-border-3),
+        0 calc(var(--pixel) * 7) 0 calc(var(--pixel) * -1) var(--pixel-border-3),
+        0 calc(var(--pixel) * -9) 0 calc(var(--pixel) * -2) var(--pixel-border-3), 
+        0 calc(var(--pixel) * 9) 0 calc(var(--pixel) * -2) var(--pixel-border-3),
+        0 calc(var(--pixel) * -12) 0 calc(var(--pixel) * -4) var(--pixel-border-3), 
+        0 calc(var(--pixel) * 12) 0 calc(var(--pixel) * -4) var(--pixel-border-3),
+        0 calc(var(--pixel) * -15) 0 calc(var(--pixel) * -6) var(--pixel-border-3), 
+        0 calc(var(--pixel) * 15) 0 calc(var(--pixel) * -6) var(--pixel-border-3);
+    }
+    select {
+      color: white;
+      background-color: rgb(28, 79, 245);
+    }
+    input[type="text"] {
+      background-color: rgb(28, 79, 245);
+      color: white;
+    }
+  }
+
+
+@media screen and (min-width: 701px) and (max-width: 1301px) {
+  #attack {
+    filter: invert(60%);
+  }
+  @keyframes flashAnimation {
+    0% {
+      filter : invert(100%); /* Opacité normale */
+    }
+    50% {
+      filter : invert(0%); /* Opacité complètement transparente */
+    }
+    100% {
+      filter : invert(100%); /* Opacité normale */
+    }
+  }
+  
+  .flash {
+    /* Applique l'animation flashAnimation pendant une seconde avec une boucle */
+    animation: flashAnimation 1s infinite;
+  }
+  
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0, 0); }
+}
+
+.shake-animation {
+    animation: shake 0.5s ease-in-out;
+}
+
+.progress-bar-hero {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+
+  .progress-bar-monster {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+  
+  .progress-fill-hero {
+    height: 100%;
+    background-color: #62ca0d !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+
+  .progress-fill-monster {
+    height: 100%;
+    background-color: #62ca0d !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  }
+  .mana-bar-hero {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+.mana-fill-hero {
+    height: 100%;
+    background-color: #0d9eca !important;
+    transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
+  
+  }
+
+  .mana-bar-monster {
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    overflow: hidden;
+  }
+  
+  .mana-fill-monster {
+    height: 100%;
+    background-color: #ca0000 !important;
     transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
   }
 
@@ -247,7 +512,7 @@ body{
       background-color: rgb(28, 79, 245);
       color: white;
     }
-  }
+}
 
     @media screen and (min-width: 1301px) {
       #attack {
@@ -341,7 +606,7 @@ body{
       
       .mana-fill-monster {
         height: 100%;
-        background-color: #0dca91 !important;
+        background-color: #ca0000 !important;
         transition: width 0.3s; /* Pour créer une animation fluide lorsque la barre se remplit */
       }
     

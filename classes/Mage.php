@@ -2,7 +2,7 @@
 class Mage extends Hero {
     private $class_id;
     private $dodge = 10;
-    private $special = 85;
+    private $special = 90;
 
     /**
      * Get the value of class_id
