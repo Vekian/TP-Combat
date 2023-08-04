@@ -82,7 +82,7 @@ require_once ('config/autoload.php');
                                         <img src="<?php echo($hero->getAvatar()); ?>" class="card-img-top">
                                         <div class="card-body text-light  text-center">
                                             <h5 class="card-title"><?php echo(ucwords($hero->getName())); ?></h5>
-                                            <p class="card-text">Classe : <?php echo($hero->getClassName()) ?><br /><?php echo("<span class='me-2'>" . $hero->getHealthpoint() . "</span>"); ?><i class="fa-solid fa-heart me-3 " style="color: #e01b24;"> </i><?php echo("<span class='me-2'>" . $hero->getAttack() . "</span>"); ?><img id="attack" src="images/attack.png" height="24px"></p>
+                                            <p class="card-text">Classe : <?php echo($hero->getClassName()) ?><br /><?php echo("<span class='me-2'>" . $hero->getHealthpoint() . "</span>"); ?><i class="fa-solid fa-heart me-3 " style="color: #e01b24;"> </i><?php echo("<span >" . $hero->getMana() . "</span>"); ?><img id="mana" src="images/mana.png" height="24px" class="me-2"><?php echo("<span class='me-2'>" . $hero->getAttack() . "</span>"); ?><img id="attack" src="images/attack.png" height="24px"></p>
                                             <button class="btn btn-primary mb-3 submit" value="<?php echo($hero->getId()); ?>">Ajouter</button>
                                             <a href="process/deleteHero.php?id=<?php echo($hero->getId()); ?>"><i class="fa-solid fa-trash-can fa-xl"></i></a>
                                         </div>

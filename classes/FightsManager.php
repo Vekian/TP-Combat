@@ -51,6 +51,9 @@
                     array_push($results, ($hero->getName() . "/" . $monster->getHealthPoint() . "/death/hero"));
                     break;
                 }
+                if ($hero->getMana() <= 50) {
+                $hero->setMana($hero->getMana() + 10);
+                }
             }
             }
             if ($monster->getHealthPoint() < 0){

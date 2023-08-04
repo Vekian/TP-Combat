@@ -1,8 +1,8 @@
 <?php
 class Ranger extends Hero {
     private $class_id;
-    private $dodge = 20;
-    private $special = 30;
+    private $dodge = 15;
+    private $special = 60;
 
     /**
      * Get the value of class_id
@@ -25,8 +25,8 @@ class Ranger extends Hero {
         return get_class($this);
     }
 
-    function __construct(string $name = null, $class_id = null, $health_point = 100, $attack = 50) {
-        parent::__construct($name, $health_point, $attack);
+    function __construct(string $name = null, $class_id = null, $health_point = 100, $mana = 20, $attack = 50) {
+        parent::__construct($name, $health_point, $mana, $attack);
         $this->class_id = $class_id;
     }
     public function hydrate ($array){
@@ -35,8 +35,9 @@ class Ranger extends Hero {
 }
     public function specialHit(Monster $monster) {
         $damage = 0;
-        if ($this->getSpecial() >= rand(0, 100)) {
-            $damage = 10;
+        if (($this->getSpecial() >= rand(0, 100)) && ($this->getMana() >= 20)) {
+            $damage = 20;
+            $this->setMana($this->getMana() - 20);
             return $damage;
         }
         else return $damage;
