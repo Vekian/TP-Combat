@@ -36,11 +36,11 @@ $heroManager->update($team);
 <body>
     <main class="col-12 d-flex flex-column align-items-center">
         <div class="col-12 d-flex justify-content-center">
-            <div class="col-md-3 rounded me-5 hero-container" id="hero-container0">
+            <div class="col-md-3 col-6 rounded me-md-5 hero-container" id="hero-container0">
                 <img src="<?php echo($team[0]->getAvatar()); ?>" class="card-img-top" >
                 <div class="card-body text-light text-center p-3 ">
-                    <h5 class="card-title"><?php echo(ucwords($team[0]->getName())); ?></h5>
-                    <p class="card-text"> <span id="heroHP0"><?php echo($heroHPTeam[0]); ?></span> PV<i class="fa-solid fa-heart" style="color: #e01b24;"></i><span id="heroMana0"><?php echo($heroManaTeam[0]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
+                    <p class="card-title"><?php echo(ucwords($team[0]->getName())); ?></p>
+                    <p class="card-text"> <span id="heroHP0" class="me-2"> <?php echo($heroHPTeam[0]); ?></span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana0" class="me-1"><?php echo($heroManaTeam[0]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
                         </div>
@@ -51,11 +51,11 @@ $heroManager->update($team);
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 rounded me-5 hero-container d-none" id="hero-container1">
+            <div class="col-md-3 col-6 rounded me-md-5 hero-container d-none" id="hero-container1">
                 <img src="<?php echo($team[1]->getAvatar()); ?>" class="card-img-top" >
                 <div class="card-body text-light text-center p-3">
-                    <h5 class="card-title"><?php echo(ucwords($team[1]->getName())); ?></h5>
-                    <p class="card-text"><span id="heroHP1"><?php echo($heroHPTeam[1]); ?> PV  </span><i class="fa-solid fa-heart" style="color: #e01b24;"></i><span id="heroMana1"><?php echo($heroManaTeam[1]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
+                    <p class="card-title"><?php echo(ucwords($team[1]->getName())); ?></p>
+                    <p class="card-text"><span id="heroHP1" class="me-2"><?php echo($heroHPTeam[1]); ?>  </span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana1" class="me-1"><?php echo($heroManaTeam[1]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
                         </div>
@@ -66,11 +66,11 @@ $heroManager->update($team);
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 rounded me-5 hero-container d-none" id="hero-container2">
+            <div class="col-md-3 col-6 rounded me-md-5 hero-container d-none" id="hero-container2">
                 <img src="<?php echo($team[2]->getAvatar()); ?>" class="card-img-top" >
                 <div class="card-body text-light text-center p-3">
-                    <h5 class="card-title"><?php echo(ucwords($team[2]->getName())); ?></h5>
-                    <p class="card-text"><span id="heroHP2"><?php echo($heroHPTeam[2]); ?> PV  </span><i class="fa-solid fa-heart" style="color: #e01b24;"></i><span id="heroMana2"><?php echo($heroManaTeam[2]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
+                    <p class="card-title"><?php echo(ucwords($team[2]->getName())); ?></p>
+                    <p class="card-text"><span id="heroHP2" class="me-2"><?php echo($heroHPTeam[2]); ?>  </span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana2" class="me-1"><?php echo($heroManaTeam[2]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
                     <div class="progress-bar-hero">
                         <div class="progress-fill-hero">
                         </div>
@@ -82,11 +82,11 @@ $heroManager->update($team);
                 </div>
             </div>
             
-            <div class="col-md-3 rounded ms-5 monster-container">
+            <div class="col-md-3 ms-2 col-6 rounded ms-md-5 monster-container">
                 <img src="<?echo ($monster->getAvatar()); ?>" class="card-img-top" >
                 <div class="card-body text-light text-center p-3">
-                    <h5 class="card-title"><?php echo(ucwords($monster->getName())); ?></h5>
-                    <p class="card-text"><i class="fa-solid fa-heart" style="color: #e01b24;"></i><span id="monsterHP"><?php echo(" " . $monsterHP); ?></span> PV</p>
+                    <p class="card-title"><?php echo(ucwords($monster->getName())); ?></p>
+                    <p class="card-text"><span id="monsterHP" class="me-2"><?php echo(" " . $monsterHP); ?></span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="monsterMana" class="me-1"><?php echo($monster->getMana()); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
                     <div class="progress-bar-monster">
                         <div class="progress-fill-monster">
                         </div>
@@ -100,7 +100,7 @@ $heroManager->update($team);
         </div>
         <div id="results" class="text-light card-body p-4 mt-4">
         </div>
-        <div class="col-4 mt-5">
+        <div class="col-md-4 col-8 mt-5">
             <a href="index.php" class="btn btn-primary col-12" id="fight" > Choisir un nouvel héros </a href="index.php">
         </div>
     </main>
@@ -112,6 +112,9 @@ $heroManager->update($team);
     let heroMana = [50, 50, 50];
     let heroManaLeft = <?php echo(json_encode($heroManaTeam)); ?>;
     let monsterHPLeft = <?php echo($monsterHP); ?>;
+    let monsterHP = <?php echo($monsterHP); ?>;
+    let monsterMana = 50;
+    let monsterManaLeft = 10;
     let heroNumber = 0;
 </script>
 <script src="js/main.js"></script>

@@ -2,7 +2,7 @@
 class Warrior extends Hero {
     private $class_id;
     private $dodge = 5;
-    private $special = 50;
+    private $special = 60;
 
     /**
      * Get the value of class_id

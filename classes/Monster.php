@@ -6,6 +6,7 @@
         private $avatar;
         private $class_id;
         private $poison = false;
+        private $mana = 10;
 
 
 
@@ -50,14 +51,25 @@
             $this->setHealthPoint($healthPoint);
         }
 
-        public function hit(Hero $hero){
-                $damage = (rand(0, 50));
+        public function hit(Hero $hero, $specialDmg){
+                $damage = (rand(10, 40));
                 if($this->advantage($hero)){
             $damage *= 2;
                 }
+                $damage += $specialDmg;
             $heroHealthPoint = $hero->getHealthPoint();
             $hero->setHealthPoint($heroHealthPoint - $damage);
-            return $damage;
+            return ($damage);
+        }
+
+        public function specialHit(Hero $hero){
+                $damage = 0;
+                if ($this->getMana() >= 50) {
+                $damage = 50;
+                $this->setMana($this->getMana() - 50);
+                return $damage;
+                }
+                else return $damage;
         }
 
         public function advantage(Hero $hero){
@@ -130,6 +142,24 @@
             $this->setHealthPoint($array['health_point']);
             $this->setAvatar($array['avatar']);
             $this->setClassId($array['class_id']);
+        }
+
+        /**
+         * Get the value of mana
+         */
+        public function getMana()
+        {
+                return $this->mana;
+        }
+
+        /**
+         * Set the value of mana
+         */
+        public function setMana($mana): self
+        {
+                $this->mana = $mana;
+
+                return $this;
         }
     }  
 ?>

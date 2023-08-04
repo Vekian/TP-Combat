@@ -17,12 +17,12 @@ require_once ('config/autoload.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body class="d-flex flex-column align-items-center">
-    <main class="col-8">
+    <main class="col-10 col-md-8">
         <?php
 
             $heroManager = new HeroesManager($db);
             if (isset($_POST['name'])){
-                    $hero = new $_POST['className']($_POST['name'], $_POST['idClass']);
+                    $hero = new $_POST['className'](htmlspecialchars($_POST['name']), $_POST['idClass']);
                 $heroManager->add($hero);
             }
             $heroes = $heroManager->findAllAlive();
@@ -31,11 +31,11 @@ require_once ('config/autoload.php');
         <header class="text-light">
         <form method="POST" class="text-center m-4">
             <label for="name">Nom</label>
-            <input type="text" id="name" name="name">
-            <label for="avatar">Choisissez votre classe : </label>
+            <input type="text" id="name" name="name" class="col-10 col-md-3">
+            <label for="avatar" class="mt-1">Choisissez votre classe : </label>
 
             
-            <select name="idClass" id="idClass" >
+            <select name="idClass" id="idClass" class="m-2" >
             <?php $query = $db->query('SELECT * FROM classes WHERE side = "hero"');
                 $classes = $query->fetchAll(PDO::FETCH_ASSOC);
                 $jsonClasses = json_encode($classes);
@@ -108,7 +108,7 @@ require_once ('config/autoload.php');
                 
             </form>
         </div>
-        <p>Votre équipe actuelle : </p>
+        <p class="mt-3">Votre équipe actuelle : </p>
         <div id="heroesTeam" class="d-flex align-items-center text-light">
             
                 <ul>
@@ -135,7 +135,7 @@ require_once ('config/autoload.php');
                 })
                 .then(function(data) {
 
-                    document.getElementById('heroesTeam').innerHTML += `<div class="me-5 m-3 p-2 card-body text-center d-flex flex-column">
+                    document.getElementById('heroesTeam').innerHTML += `<div class="me-md-5 m-md-3 mt-3 p-2 card-body text-center d-flex flex-column">
                                             <h5 class="card-title">${data.name}</h5>
                                             <p class="card-text">Classe : ${data.nameClass}<br /><i class="fa-solid fa-heart" style="color: #e01b24;"></i> ${data.health_point} PV</p>
                                             </div>`;
@@ -164,7 +164,7 @@ require_once ('config/autoload.php');
         </script>
     <form action="process/heal.php" method="POST">
         <input type="hidden" name="heal" value="1">
-        <input type="submit" value="Soigner tous les héros" class="btn btn-primary">
+        <input type="submit" value="Soigner tous les héros" class="btn btn-primary mt-2">
     </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
