@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Aug 03, 2023 at 02:17 PM
+-- Generation Time: Aug 05, 2023 at 08:57 AM
 -- Server version: 10.6.12-MariaDB-1:10.6.12+maria~ubu2004-log
 -- PHP Version: 8.1.14
 
@@ -60,6 +60,7 @@ CREATE TABLE `heroes` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `health_point` int(11) NOT NULL DEFAULT 100,
+  `mana` int(11) NOT NULL,
   `attack` int(11) NOT NULL DEFAULT 50,
   `class_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -68,19 +69,22 @@ CREATE TABLE `heroes` (
 -- Dumping data for table `heroes`
 --
 
-INSERT INTO `heroes` (`id`, `name`, `health_point`, `attack`, `class_id`) VALUES
-(4, 'mathieu', 100, 50, 4),
-(5, 'ismael', 100, 60, 2),
-(6, 'Alexandre', 80, 30, 3),
-(7, 'yvan', 140, 40, 1),
-(8, 'david', 80, 30, 3),
-(9, 'melyne', 100, 50, 4),
-(10, 'mélanie', 100, 50, 4),
-(11, 'Gérard', 100, 50, 4),
-(20, 'soslan', 140, 40, 1),
-(22, 'hamza', 80, 30, 3),
-(27, 'serge', 140, 40, 1),
-(29, 'hamza', 80, 30, 3);
+INSERT INTO `heroes` (`id`, `name`, `health_point`, `mana`, `attack`, `class_id`) VALUES
+(4, 'mathieu', 100, 20, 50, 4),
+(5, 'ismael', 100, 10, 60, 2),
+(6, 'Alexandre', 80, 30, 30, 3),
+(7, 'yvan', 140, 20, 40, 1),
+(8, 'david', 80, 30, 30, 3),
+(9, 'melyne', 100, 20, 50, 4),
+(10, 'mélanie', 100, 20, 50, 4),
+(11, 'Gérard', 100, 20, 50, 4),
+(20, 'soslan', 140, 20, 40, 1),
+(22, 'hamza', 80, 30, 30, 3),
+(27, 'serge', 140, 20, 40, 1),
+(29, 'hamza', 80, 30, 30, 3),
+(38, 'Liam', 100, 10, 10, 2),
+(39, 'Remi', 140, 20, 20, 1),
+(40, 'Evgueni', 100, 10, 10, 2);
 
 -- --------------------------------------------------------
 
@@ -144,7 +148,7 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `heroes`
 --
 ALTER TABLE `heroes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `monsters`
