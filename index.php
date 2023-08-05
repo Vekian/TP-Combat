@@ -48,7 +48,7 @@ require_once ('config/autoload.php');
             <input type="hidden" id="avatar" name="avatar"  value="">
             <input type="hidden" id="className" name="className" value="">
             <img src="" width="100px"/> 
-            <input type="submit" value="Envoyer" class="btn btn-primary">
+            <input type="submit" value="Créer" class="btn btn-primary">
         </form>
         </header>
         
@@ -70,6 +70,7 @@ require_once ('config/autoload.php');
                 document.getElementById('className').value = className;
             });
         </script>
+        <p class="mt-3 text-warning text-center">Choisissez trois héros </p>
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner rounded">
             <?php $totalHeroes = count($heroes); ?>

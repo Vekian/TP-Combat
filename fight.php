@@ -36,56 +36,37 @@ $heroManager->update($team);
 <body>
     <main class="col-12 d-flex flex-column align-items-center">
         <div class="col-12 d-flex justify-content-center">
-            <div class="col-md-3 col-6 rounded me-md-5 hero-container" id="hero-container0">
-                <img src="<?php echo($team[0]->getAvatar()); ?>" class="card-img-top" >
-                <div class="card-body text-light text-center p-3 ">
-                    <p class="card-title"><?php echo(ucwords($team[0]->getName())); ?></p>
-                    <p class="card-text"> <span id="heroHP0" class="me-2"> <?php echo($heroHPTeam[0]); ?></span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana0" class="me-1"><?php echo($heroManaTeam[0]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
-                    <div class="progress-bar-hero">
-                        <div class="progress-fill-hero">
+            <?php 
+                for($i = 0; $i < count($team); $i++) {
+                    if($i !== 0){
+                        $display = "d-none";
+                    }
+                    else {
+                        $display= "";
+                    };
+                    echo('<div class="col-md-3 col-6 rounded me-md-5 hero-container '. $display .'" id="hero-container' . $i . '">
+                    <img src="' . $team[$i]->getAvatar() . '" class="card-img-top" >
+                    <div class="card-body text-light text-center p-3 ">
+                        <p class="card-title">' . ucwords($team[$i]->getName()) . '</p>
+                        <p class="card-title">' . ucwords($team[$i]->getClassName()) . '</p>
+                        <p class="card-text"> <span id="heroHP' . $i . '" class="me-2">' . $heroHPTeam[$i] . '</span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana' . $i . '" class="me-1">' . $heroManaTeam[$i] . '</span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
+                        <div class="progress-bar-hero">
+                            <div class="progress-fill-hero">
+                            </div>
+                        </div>
+                        <div class="mana-bar-hero">
+                            <div class="mana-fill-hero">
+                            </div>
                         </div>
                     </div>
-                    <div class="mana-bar-hero">
-                        <div class="mana-fill-hero">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 rounded me-md-5 hero-container d-none" id="hero-container1">
-                <img src="<?php echo($team[1]->getAvatar()); ?>" class="card-img-top" >
-                <div class="card-body text-light text-center p-3">
-                    <p class="card-title"><?php echo(ucwords($team[1]->getName())); ?></p>
-                    <p class="card-text"><span id="heroHP1" class="me-2"><?php echo($heroHPTeam[1]); ?>  </span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana1" class="me-1"><?php echo($heroManaTeam[1]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
-                    <div class="progress-bar-hero">
-                        <div class="progress-fill-hero">
-                        </div>
-                    </div>
-                    <div class="mana-bar-hero">
-                        <div class="mana-fill-hero">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 rounded me-md-5 hero-container d-none" id="hero-container2">
-                <img src="<?php echo($team[2]->getAvatar()); ?>" class="card-img-top" >
-                <div class="card-body text-light text-center p-3">
-                    <p class="card-title"><?php echo(ucwords($team[2]->getName())); ?></p>
-                    <p class="card-text"><span id="heroHP2" class="me-2"><?php echo($heroHPTeam[2]); ?>  </span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="heroMana2" class="me-1"><?php echo($heroManaTeam[2]); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
-                    <div class="progress-bar-hero">
-                        <div class="progress-fill-hero">
-                        </div>
-                    </div>
-                    <div class="mana-bar-hero">
-                        <div class="mana-fill-hero">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                </div>');
+                };
+            ?>
             <div class="col-md-3 ms-2 col-6 rounded ms-md-5 monster-container">
                 <img src="<?echo ($monster->getAvatar()); ?>" class="card-img-top" >
                 <div class="card-body text-light text-center p-3">
                     <p class="card-title"><?php echo(ucwords($monster->getName())); ?></p>
+                    <p class="card-title"><?php echo(ucwords($monster->getClassName())); ?></p>
                     <p class="card-text"><span id="monsterHP" class="me-2"><?php echo(" " . $monsterHP); ?></span><i class="fa-solid fa-heart me-3" style="color: #e01b24;"></i><span id="monsterMana" class="me-1"><?php echo($monster->getMana()); ?></span><img id="mana" src="images/mana.png" height="24px" class="me-2"></p>
                     <div class="progress-bar-monster">
                         <div class="progress-fill-monster">
