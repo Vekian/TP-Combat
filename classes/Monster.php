@@ -5,6 +5,7 @@
         private $healthPoint;
         private $avatar;
         private $class_id;
+        private $className;
         private $poison = false;
         private $mana = 10;
 
@@ -142,6 +143,7 @@
             $this->setHealthPoint($array['health_point']);
             $this->setAvatar($array['avatar']);
             $this->setClassId($array['class_id']);
+            $this->setClassName($array['nameClass']);
         }
 
         /**
@@ -158,6 +160,24 @@
         public function setMana($mana): self
         {
                 $this->mana = $mana;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of className
+         */
+        public function getClassName()
+        {
+                return $this->className;
+        }
+
+        /**
+         * Set the value of className
+         */
+        public function setClassName($className): self
+        {
+                $this->className = $className;
 
                 return $this;
         }
